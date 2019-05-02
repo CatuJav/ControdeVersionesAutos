@@ -15,7 +15,9 @@ public class Ejemplo1DS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+   
+        //hecho por Sebastian
+        System.out.println("Practica001");
     }
     
 }
