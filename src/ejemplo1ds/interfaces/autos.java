@@ -80,7 +80,7 @@ public class autos extends javax.swing.JFrame {
 public void prueba01(){
     //elaborado por sebastian gonzalez
     System.out.println("Aporte01");
-    System.out.println("Aporte por Javier Catucuago");
+    System.out.println("Aporte por Javier Catucuago ds");
 }
     public void limpiar() {
         txtAutPlaca.setText("");
