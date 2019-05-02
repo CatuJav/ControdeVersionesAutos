@@ -32,6 +32,7 @@ public class autos extends javax.swing.JFrame {
     DefaultTableModel modelo;
 
     public autos() {
+        //Ejemolo por Javier
         initComponents();
         bloquear();
         bloquearBoton();
