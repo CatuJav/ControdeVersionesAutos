@@ -76,7 +76,10 @@ public class autos extends javax.swing.JFrame {
             }
         });
     }
-
+public void prueba01(){
+    //elaborado por sebastian gonzalez
+    System.out.println("Aporte01");
+}
     public void limpiar() {
         txtAutPlaca.setText("");
         cbxAutMarca.setSelectedItem("Seleccione...");
