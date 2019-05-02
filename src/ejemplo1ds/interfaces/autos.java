@@ -88,7 +88,7 @@ public class autos extends javax.swing.JFrame {
     }
 
     public void bloquearBoton() {
-        System.out.println("hola");
+        System.out.println("hola 2");
         btnNuevo.setEnabled(true);
         btnModificar.setEnabled(false);
         btnCancelar.setEnabled(false);
