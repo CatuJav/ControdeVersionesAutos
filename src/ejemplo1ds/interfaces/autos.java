@@ -91,7 +91,7 @@ public void prueba01(){
     }
 
     public void bloquearBoton() {
-        System.out.println("hola");
+        System.out.println("hola 2");
         btnNuevo.setEnabled(true);
         btnModificar.setEnabled(false);
         btnCancelar.setEnabled(false);
