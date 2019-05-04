@@ -80,6 +80,7 @@ public class autos extends javax.swing.JFrame {
 public void prueba01(){
     //elaborado por sebastian gonzalez
     System.out.println("Aporte01");
+
 }
     public void limpiar() {
         txtAutPlaca.setText("");
@@ -92,7 +93,7 @@ public void prueba01(){
     }
 
     public void bloquearBoton() {
-        System.out.println("hola 2");
+
         btnNuevo.setEnabled(true);
         btnModificar.setEnabled(false);
         btnCancelar.setEnabled(false);
