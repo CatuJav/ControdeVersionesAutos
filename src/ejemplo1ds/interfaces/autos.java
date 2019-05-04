@@ -138,10 +138,10 @@ public class autos extends javax.swing.JFrame {
 
     public void guardarAuto() {
         try {
+            boolean pla=false,mod=false,mar=false,anio=false,col=false,cap=false;
             String AUT_PLACA = "", MOD_CODIGO = "", AUT_COLOR = "", AUT_OBSERVACION;
             Integer AUT_ANIO = 1960, AUT_CAPACIDAD = 0;
-            conexion cc = new conexion();
-            Connection cn = cc.conectar(); //Connection java.sql
+             //Connection java.sql
             
             if (txtAutPlaca.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ingrese la placa");
@@ -149,33 +149,49 @@ public class autos extends javax.swing.JFrame {
             } else {
 
                 AUT_PLACA = txtAutPlaca.getText();
+                pla=true;
+            }
+            if (cbxAutMarca.getSelectedItem().toString().equals("Seleccione...")) {
+                JOptionPane.showMessageDialog(null, "Seleccione una marca");
+                cbxAutMarca.requestFocus();
+            }else{
+                mar=true;
             }
             if (cbxAutModelo.getSelectedItem().toString().equals("Seleccione...")) {
                 JOptionPane.showMessageDialog(null, "Seleccione un modelo");
                 cbxAutModelo.requestFocus();
             } else {
                 MOD_CODIGO = cbxAutModelo.getSelectedItem().toString().split(" ")[0];
+                mod=true;
             }
             if (Integer.valueOf(spnAutAnio.getValue().toString()) < 1960 || Integer.valueOf(spnAutAnio.getValue().toString()) > 2019) {
                 JOptionPane.showMessageDialog(null, "Ingrese el año correcto");
                 spnAutAnio.requestFocus();
             } else {
                 AUT_ANIO = Integer.valueOf(spnAutAnio.getValue().toString());
+                anio=true;
             }
             if (cbxAutColor.getSelectedItem().toString().equals("Seleccione...")) {
                 JOptionPane.showMessageDialog(null, "Seleccione un color");
                 cbxAutColor.requestFocus();
             } else {
                 AUT_COLOR = cbxAutColor.getSelectedItem().toString();
+                col=true;
             }
             if (Integer.valueOf(spnAutCapacidad.getValue().toString()) > 25) {
                 JOptionPane.showMessageDialog(null, "Menor de 25");
                 spnAutCapacidad.requestFocus();
+                
             } else {
                 AUT_CAPACIDAD = Integer.valueOf(spnAutCapacidad.getValue().toString());
+                cap=true;
             }
+            if (pla==true && mod==true && mar==true && anio==true && col==true && cap==true) {
+                
+            
             AUT_OBSERVACION = txtAutObservacion.getText();
-
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
             String sql = "";
             sql = "insert into autos(AUT_PLACA, MOD_CODIGO, "
                     + "AUT_ANIO, AUT_COLOR, "
@@ -198,6 +214,8 @@ public class autos extends javax.swing.JFrame {
             if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Insersión correcta");
                 cargarTablaAutos("");
+            }}else{
+                System.out.println(pla+" "+mar+" "+mod+" "+anio+" "+col+" "+cap);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -265,7 +283,7 @@ public class autos extends javax.swing.JFrame {
         txtAutPlaca.setText("");
         cbxAutMarca.setSelectedIndex(0);
         cbxAutModelo.setSelectedItem(0);
-        spnAutAnio.setValue(0);
+        spnAutAnio.setValue(1960);
         cbxAutColor.setSelectedIndex(0);
         spnAutCapacidad.setValue(0);
         txtAutObservacion.setText("");
