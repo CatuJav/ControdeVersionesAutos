@@ -16,7 +16,7 @@ public class comp extends javax.swing.JFrame {
      */
     public comp() {
         initComponents();
-        cbxCargarDastos1.cargarDatos("mysql", "db", "Alter_priv");
+        cbxCargarDastos1.cargarDatos("viaje", "AUTOS", "AUT_PLACA");
         
     }
 
