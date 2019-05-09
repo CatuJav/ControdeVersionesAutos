@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Nitro5
  */
-public class autos extends javax.swing.JFrame {
+public class autos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form autos
