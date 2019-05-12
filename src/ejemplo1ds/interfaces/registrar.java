@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Nitro5
  */
-public class registrar extends javax.swing.JInternalFrame {
+public class registrar extends javax.swing.JFrame {
 
     /**
      * Creates new form registrar
@@ -50,7 +50,7 @@ public class registrar extends javax.swing.JInternalFrame {
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Cedula");
 
@@ -59,6 +59,18 @@ public class registrar extends javax.swing.JInternalFrame {
         jLabel3.setText("Contraseña");
 
         jLabel4.setText("Repita la contaseña");
+
+        txtRContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRContraKeyTyped(evt);
+            }
+        });
+
+        txtRComprobarContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRComprobarContraKeyTyped(evt);
+            }
+        });
 
         cbxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "administrador", "secretario", "gerente" }));
 
@@ -163,6 +175,20 @@ public class registrar extends javax.swing.JInternalFrame {
         this.dispose();
         
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtRContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRContraKeyTyped
+        // TODO add your handling code here:
+        if (txtRContra.getPassword().length==4) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRContraKeyTyped
+
+    private void txtRComprobarContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRComprobarContraKeyTyped
+        // TODO add your handling code here:
+        if (txtRComprobarContra.getPassword().length==4) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRComprobarContraKeyTyped
 
     /**
      * @param args the command line arguments

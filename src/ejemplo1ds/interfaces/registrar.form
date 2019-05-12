@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -123,8 +122,14 @@
     <Component class="javax.swing.JTextField" name="txtRNombre">
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtRContra">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRContraKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtRComprobarContra">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRComprobarContraKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxCargo">
       <Properties>
