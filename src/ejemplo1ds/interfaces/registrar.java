@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Nitro5
  */
-public class registrar extends javax.swing.JFrame {
+public class registrar extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form registrar
