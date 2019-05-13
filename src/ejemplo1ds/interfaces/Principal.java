@@ -30,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jdspPrincipal = new javax.swing.JDesktopPane();
+        txtBienvenida = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -41,15 +42,25 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtBienvenida.setText("Bienvenido");
+
+        jdspPrincipal.setLayer(txtBienvenida, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jdspPrincipalLayout = new javax.swing.GroupLayout(jdspPrincipal);
         jdspPrincipal.setLayout(jdspPrincipalLayout);
         jdspPrincipalLayout.setHorizontalGroup(
             jdspPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdspPrincipalLayout.createSequentialGroup()
+                .addContainerGap(320, Short.MAX_VALUE)
+                .addComponent(txtBienvenida)
+                .addGap(18, 18, 18))
         );
         jdspPrincipalLayout.setVerticalGroup(
             jdspPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(jdspPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtBienvenida)
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Interfaces");
@@ -76,6 +87,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Usuarios");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ejemplo1ds/imagenes/agregar-usuario.png"))); // NOI18N
         jMenuItem3.setText("Resgistrar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,8 +168,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    public static javax.swing.JMenu jMenu1;
+    public static javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -165,5 +177,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdspPrincipal;
+    public static javax.swing.JLabel txtBienvenida;
     // End of variables declaration//GEN-END:variables
 }
