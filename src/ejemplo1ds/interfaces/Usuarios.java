@@ -28,34 +28,54 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         txtmsgLogin.setVisible(false);
     }
-    public void ingresar(){
-        String usu, contra,usubase,contrabase;
+
+    public void ingresar() {
+        String usu, contra, usubase, contrabase;
         try {
-            conexion cc= new conexion();
+            conexion cc = new conexion();
             Connection cn = cc.conectar();
-            String sql="";
-            sql="SELECT * FROM ususarios ";
+            String sql = "";
+            sql = "SELECT * FROM ususarios ";
             Statement psd = cn.createStatement();
             ResultSet rs = psd.executeQuery(sql);
-            usu=txtUsuario.getText();
-            contra=txtClave.getText();
-            while(rs.next()){
-            usubase=rs.getString("USU_CEDULA");
-            contrabase=rs.getString("USU_CLAVE");
-                if (usu==null ? usubase==null : usu.equals(usubase) && 
-                    contra==null ? contrabase==null : contra.equals(contrabase)) { //if condicional
-                   Principal pr = new Principal();
-                   pr.setVisible(true);
-                   pr.setExtendedState(MAXIMIZED_BOTH);
-                   this.dispose();
-                }else{
-                txtmsgLogin.setVisible(true);
+            usu = txtUsuario.getText();
+            contra = txtClave.getText();
+            String nom="";
+            String ape="";
+            while (rs.next()) {
+                usubase = rs.getString("USU_CEDULA");
+                contrabase = rs.getString("USU_CLAVE");
+                nom=rs.getString("USU_NOMBRE");
+                ape=rs.getString("USU_APELLIDO");
+                if (usu.equals(usubase)
+                        && contra.equals(contrabase)) { //if condicional
+                    if (rs.getString("USU_PERFIL").equals("administrador")) {
+                        
+                        Principal pr = new Principal(); 
+                        pr.setVisible(true);
+                        pr.setExtendedState(MAXIMIZED_BOTH);
+                        this.dispose();
+                        Principal.jMenu1.setEnabled(false);
+                        Principal.txtBienvenida.setText("Bienvenido: "+nom+" "+ape);
+                        Principal.txtBienvenida.setForeground(Color.WHITE);
+                    } else if (rs.getString("USU_PERFIL").equals("secretario")) {
+
+                        Principal pr = new Principal();
+                        pr.setVisible(true);
+                        pr.setExtendedState(MAXIMIZED_BOTH);
+                        this.dispose();
+                        Principal.jMenu2.setEnabled(false);
+                        Principal.txtBienvenida.setText("Bienvenido: "+ nom+" "+ape);
+                        Principal.txtBienvenida.setForeground(Color.WHITE);
+                    }
+                } else {
+                    txtmsgLogin.setVisible(true);
                 }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-    
+
     }
 
     /**
