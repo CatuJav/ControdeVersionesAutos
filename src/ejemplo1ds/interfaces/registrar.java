@@ -5,6 +5,7 @@
  */
 package ejemplo1ds.interfaces;
 
+import clases.Encriptacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -270,6 +271,7 @@ public void registrar() {
             for (int i = 0; i < p.length; i++) {
                 CONR += p[i];
             }
+            CONR =Encriptacion.getMD5(CONR);
             bcont = true;
         }
         if (txtRComprobarContra.getPassword().toString().isEmpty()) {
