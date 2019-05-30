@@ -5,6 +5,7 @@
  */
 package ejemplo1ds.interfaces;
 
+import clases.Encriptacion;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -30,7 +31,7 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
     public void ingresar() {
-        String usu, contra, usubase, contrabase;
+        String usu, contra = "", usubase, contrabase;
         try {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
@@ -39,7 +40,12 @@ public class Usuarios extends javax.swing.JFrame {
             Statement psd = cn.createStatement();
             ResultSet rs = psd.executeQuery(sql);
             usu = txtUsuario.getText();
-            contra = txtClave.getText();
+             char[] p = txtClave.getPassword();
+            for (int i = 0; i < p.length; i++) {
+                contra += p[i];
+            }
+            contra = Encriptacion.getMD5(contra);
+            System.out.println("con: "+contra);
             String nom="";
             String ape="";
             while (rs.next()) {
@@ -56,6 +62,7 @@ public class Usuarios extends javax.swing.JFrame {
                         pr.setExtendedState(MAXIMIZED_BOTH);
                         this.dispose();
                         Principal.jMenu1.setEnabled(false);
+                        Principal.jMenu2.setEnabled(false);
                         Principal.txtBienvenida.setText("Bienvenido: "+nom+" "+ape);
                         Principal.txtBienvenida.setForeground(Color.WHITE);
                     } else if (rs.getString("USU_PERFIL").equals("secretario")) {
@@ -64,7 +71,7 @@ public class Usuarios extends javax.swing.JFrame {
                         pr.setVisible(true);
                         pr.setExtendedState(MAXIMIZED_BOTH);
                         this.dispose();
-                        Principal.jMenu2.setEnabled(false);
+                        Principal.jMenu4.setEnabled(false);
                         Principal.txtBienvenida.setText("Bienvenido: "+ nom+" "+ape);
                         Principal.txtBienvenida.setForeground(Color.WHITE);
                     }
@@ -90,11 +97,11 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtmsgLogin = new javax.swing.JLabel();
+        txtClave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +117,11 @@ public class Usuarios extends javax.swing.JFrame {
         });
 
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ejemplo1ds/imagenes/bloquear.png"))); // NOI18N
 
@@ -156,7 +168,7 @@ public class Usuarios extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3))
@@ -176,6 +188,11 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         ingresar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +235,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtClave;
+    private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JLabel txtmsgLogin;
     // End of variables declaration//GEN-END:variables
