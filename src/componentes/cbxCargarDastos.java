@@ -63,6 +63,28 @@ public class cbxCargarDastos extends JComboBox {
 
             }
         }
+    public void cargarDatos(String base, String tabla, String campo1, String campo2) {  
+        
+        
+        
+            try {
+        
+                String sql = "";
+                sql = "select "+campo1+","+campo2+ " from "+tabla;
+                Statement psd = conectar(base).createStatement();
+                ResultSet rs = psd.executeQuery(sql);//ResulteSet es parte del Middleware
+                this.addItem("Seleccione...");
+                while (rs.next()) {
+                    String cod = rs.getString(campo1);
+                    String cod2 = rs.getString(campo2);
+                    this.addItem(cod+" "+cod2);
+                   
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+
+            }
+        }
     }
         
 
