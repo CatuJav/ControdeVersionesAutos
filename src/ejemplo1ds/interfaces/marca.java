@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Nitro5
  */
-public class marca extends javax.swing.JInternalFrame {
+public class marca extends javax.swing.JFrame {
 
     /**
      * Creates new form marca
@@ -32,6 +32,7 @@ public class marca extends javax.swing.JInternalFrame {
         cargarCodigo();
         cargarTabla("");
         tblMarca.getTableHeader().setReorderingAllowed(false) ;
+        tblMarca.setDefaultEditor(Object.class, null);
               tblMarca.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent e) {
