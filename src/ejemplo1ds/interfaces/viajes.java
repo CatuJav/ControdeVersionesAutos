@@ -14,7 +14,10 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,11 +33,32 @@ public class viajes extends javax.swing.JInternalFrame {
         initComponents();
         cargarCodigo();
         calendario();
+        tblViajes.getTableHeader().setReorderingAllowed(false) ;
         cbxPalcaVi.cargarDatos("viaje", "autos", "AUT_PLACA");
         cbxChoferVi.cargarDatos("viaje", "chofer", "CHO_CEDULA");
         cbxOrigen.cargarDatos("viaje", "ciudades", "CIU_CODIGO", "CIU_NOMBRE");
         cbxDestino.cargarDatos("viaje", "ciudades", "CIU_CODIGO", "CIU_NOMBRE");
         cargarTabla("");
+         tblViajes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (tblViajes.getSelectedRow() != -1) {
+                    int fila = tblViajes.getSelectedRow();
+                    txtCodigoVi.setText(tblViajes.getValueAt(fila, 0).toString());
+                    cbxPalcaVi.setSelectedItem(tblViajes.getValueAt(fila, 1).toString());
+                    cbxChoferVi.setSelectedItem(tblViajes.getValueAt(fila, 2).toString());
+                    txtFechaSalida.setText(tblViajes.getValueAt(fila, 3).toString());
+                    txtFechaLlegada.setText(tblViajes.getValueAt(fila, 4).toString());
+                    txtCosto.setText(tblViajes.getValueAt(fila, 5).toString());
+                    spnKilometraje.setValue(Integer.valueOf(tblViajes.getValueAt(fila, 6).toString()));
+                    cbxOrigen.setSelectedItem(tblViajes.getValueAt(fila, 7).toString());
+                    cbxDestino.setSelectedItem(tblViajes.getValueAt(fila, 8).toString());
+                    txtObservaciones.setText(tblViajes.getValueAt(fila, 9).toString());
+                    
+                }
+            }
+    
+    });
     }
 
     public void cargarTabla(String dato) {
@@ -63,6 +87,8 @@ public class viajes extends javax.swing.JInternalFrame {
                 registro[9] = rs.getString(8);
                 modelo.addRow(registro);
             }
+            ulti=Integer.valueOf(registro[0]);
+            System.out.println("util: "+ulti);
             tblViajes.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(viajes.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,8 +146,11 @@ public class viajes extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("VIAJES");
 
@@ -173,10 +202,31 @@ public class viajes extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -188,7 +238,11 @@ public class viajes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -197,8 +251,14 @@ public class viajes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,7 +296,7 @@ public class viajes extends javax.swing.JInternalFrame {
                             .addComponent(txtObservaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(42, 42, 42)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -264,21 +324,21 @@ public class viajes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(spnKilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(spnKilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -291,7 +351,7 @@ public class viajes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(txtObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -318,6 +378,22 @@ public class viajes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        cargarCodigo();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        modificarViaje();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,6 +437,9 @@ public class viajes extends javax.swing.JInternalFrame {
     private componentes.cbxCargarDastos cbxPalcaVi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -482,6 +561,7 @@ public class viajes extends javax.swing.JInternalFrame {
                 int n = psd.executeUpdate();
                 if (n > 0) {
                     JOptionPane.showMessageDialog(this, "Inserción correcta");
+                    cargarTabla("");
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -501,5 +581,122 @@ public class viajes extends javax.swing.JInternalFrame {
         cbxPalcaVi.setSelectedIndex(0);
         spnKilometraje.setValue(0);
 
+    }
+
+    private void modificarViaje() {
+        String codigo = "", placa = "", cedula = "", fsalida = "", fllegada = "", costo = "", kilmetraje= "", observacion= "", origen= "", destino= "";
+        boolean pla = false, ced = false, fsa = false, flle = false, cos = false, kilo = false, ori = false, des = false;
+        if (cbxPalcaVi.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una placa");
+        } else {
+            pla = true;
+        }
+        if (cbxChoferVi.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un chofer");
+        } else {
+
+            ced = true;
+        }
+        if (txtFechaSalida.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fecha de salida");
+        } else {
+            fsa = true;
+        }
+        if (txtFechaLlegada.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fecha de llegada");
+        } else {
+            flle = true;
+        }
+        if (txtCosto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ponga un costo");
+        } else {
+            cos = true;
+        }
+        if (spnKilometraje.getValue().equals("")) {
+            JOptionPane.showMessageDialog(this, "Establezca el kilometraje");
+        } else {
+            kilo = true;
+        }
+        if (txtObservaciones.getText().isEmpty()) {
+            observacion = "NINGUNA";
+        } else {
+            observacion = txtObservaciones.getText();
+        }
+        if (cbxOrigen.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un lugar de origen");
+        } else {
+            ori = true;
+        }
+        if (cbxDestino.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un lugar de destino");
+        } else {
+            des = true;
+        }
+
+        if (pla && ced && fsa && flle && cos && kilo && ori && des) {
+            try {
+                codigo = txtCodigoVi.getText();
+                placa = cbxPalcaVi.getSelectedItem().toString();
+                cedula = cbxChoferVi.getSelectedItem().toString();
+                fsalida = txtFechaSalida.getText();
+                fllegada = txtFechaLlegada.getText();
+                costo = txtCosto.getText();
+                kilmetraje = spnKilometraje.getValue().toString();
+                String origenco[] = cbxOrigen.getSelectedItem().toString().split(" ");
+                origen = origenco[0];
+                String destinoco[] = cbxDestino.getSelectedItem().toString().split(" ");
+                destino = destinoco[0];
+                conexion cc = new conexion();
+                Connection cn = cc.conectar();
+                String sql = "";
+                sql = "UPDATE viajes SET AUT_PLACA='" +placa+
+                        "', CHO_CEDULA='"+cedula+
+                        "', F_SALIDA='"+fsalida+
+                        "', F_LLEGADA='"+fllegada+
+                        "', VIAJE_COSTO='"+costo+
+                        "', VIAJE_KILOMETRAJE='"+kilmetraje+
+                        "', VIAJE_OBSERVACION='"+observacion+
+                        "', CIU_CODIGO='"+origen+
+                        "', CIU_CIU_CODIGO='"+destino
+                    +  "' where VIAJE_CODIGO='" + codigo + "'";
+            PreparedStatement psd = cn.prepareStatement(sql);
+            int n= psd.executeUpdate();
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Se modificó");
+                cargarTabla("");
+              
+            
+                limpiar();
+            }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            cargarCodigo();
+        }
+    }
+    int ulti;
+    private void eliminar() {
+         if(txtCodigoVi.getText().isEmpty()||Integer.valueOf(txtCodigoVi.getText())>ulti){}else{
+           if (JOptionPane.showConfirmDialog(new JInternalFrame(),
+                "Estas seguro de borrar el registro?", "Borrar resgistro", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        
+        try {
+            
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "DELETE FROM viajes  WHERE VIAJE_CODIGO='" + txtCodigoVi.getText() + "'";
+            PreparedStatement psd = cn.prepareStatement(sql);
+            int n = psd.executeUpdate();
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Se elimino");
+                cargarTabla("");
+                
+                limpiar();
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }}else{}}
     }
 }
