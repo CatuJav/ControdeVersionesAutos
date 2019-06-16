@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Nitro5
  */
-public class marca extends javax.swing.JFrame {
+public class marca extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form marca
