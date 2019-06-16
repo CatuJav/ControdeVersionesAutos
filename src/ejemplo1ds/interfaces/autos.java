@@ -38,6 +38,7 @@ public class autos extends javax.swing.JInternalFrame {
         bloquearBoton();
         cargarMarca();
         cargarTablaAutos("");
+        tblAuto.getTableHeader().setReorderingAllowed(false) ;
         spnAutAnio.setValue(1960);
         tblAuto.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
