@@ -5,6 +5,28 @@
  */
 package ejemplo1ds.interfaces;
 
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
+import reportes2.ReportesViajePlaca;
+import reportes2.autosPlaca;
+import reportes2.maestro;
+
 /**
  *
  * @author Nitro5
@@ -35,6 +57,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -83,6 +110,52 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Reportes");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem9.setText("ReporteAutos");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setText("ReportePlaca");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem10);
+
+        jMenuItem11.setText("Chofer y auto");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem11);
+
+        jMenuItem12.setText("Costos por viaje");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem12);
+
+        jMenuItem13.setText("Auto Viaje");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem13);
+
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Registrar");
@@ -233,6 +306,82 @@ public class Principal extends javax.swing.JFrame {
         us.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+            // TODO add your handling code here:
+            conexion  cc= new conexion();
+             Connection cn= cc.conectar();
+            Map parametros = new HashMap();
+            JasperReport reporte=JasperCompileManager.compileReport("D:\\programasjava\\reportes\\ReportesAutos.jrxml");
+            JasperPrint impresion = JasperFillManager.fillReport(reporte, null,cn);
+            //JasperViewer.viewReport(impresion);
+            JRViewer vista = new JRViewer(impresion);
+            JInternalFrame sj = new JInternalFrame();
+            sj.setClosable(true);
+            sj.add(vista);
+            sj.setSize(800, 800);
+            sj.setVisible(true);
+            jdspPrincipal.add(sj);
+          
+            //jdspPrincipal.add(vista);
+            //<jdspPrincipal.setVisible(true);
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+        
+     
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+           autosPlaca a = new autosPlaca();
+           a.setClosable(true);
+        jdspPrincipal.add(a);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        ReportesViajePlaca r= new ReportesViajePlaca();
+     
+        jdspPrincipal.add(r);
+        r.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        try {
+            // TODO add your handling code here:
+            conexion  cc= new conexion();
+            Connection cn= cc.conectar();
+            Map parametros = new HashMap();
+            JasperReport reporte=JasperCompileManager.compileReport("D:\\programasjava\\reportes\\grafico.jrxml");
+            //parametros.put("placa", jTextField1.getText());
+            JasperPrint impresion = JasperFillManager.fillReport(reporte, null,cn);
+            //JasperViewer.viewReport(impresion,false);
+            JRViewer vista = new JRViewer(impresion);
+            JInternalFrame sj = new JInternalFrame();
+            sj.setClosable(true);
+            sj.add(vista);
+            sj.setSize(800, 800);
+            sj.setVisible(true);
+            Principal.jdspPrincipal.add(sj);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+        maestro m = new maestro();
+   
+        jdspPrincipal.add(m);
+        m.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,6 +424,10 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -282,7 +435,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JDesktopPane jdspPrincipal;
+    private javax.swing.JMenuItem jMenuItem9;
+    public static javax.swing.JDesktopPane jdspPrincipal;
     public static javax.swing.JLabel txtBienvenida;
     // End of variables declaration//GEN-END:variables
 }
