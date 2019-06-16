@@ -5,7 +5,8 @@
  */
 package ejemplo1ds.interfaces;
 
-import clases.Encriptacion;
+
+import clases.Cifrar;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,6 +32,7 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
     public void ingresar() {
+        Cifrar c = new Cifrar();
         String usu, contra = "", usubase, contrabase;
         try {
             conexion cc = new conexion();
@@ -44,7 +46,7 @@ public class Usuarios extends javax.swing.JFrame {
             for (int i = 0; i < p.length; i++) {
                 contra += p[i];
             }
-            contra = Encriptacion.getMD5(contra);
+            contra = c.encriptart(contra);
             System.out.println("con: "+contra);
             String nom="";
             String ape="";
@@ -79,7 +81,7 @@ public class Usuarios extends javax.swing.JFrame {
                     txtmsgLogin.setVisible(true);
                 }
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
