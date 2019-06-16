@@ -7,10 +7,16 @@ package ejemplo1ds.interfaces;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +29,23 @@ public class chofer extends javax.swing.JInternalFrame {
      */
     public chofer() {
         initComponents();
+        cargarTabla("");
+        tblChoferes.getTableHeader().setReorderingAllowed(false) ;
+        tblChoferes.getTableHeader().setReorderingAllowed(false) ;
+        tblChoferes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (tblChoferes.getSelectedRow() != -1) {
+                    int fila = tblChoferes.getSelectedRow();
+                    txtCedula.setText(tblChoferes.getValueAt(fila, 0).toString());
+                    txtNombre.setText(tblChoferes.getValueAt(fila, 1).toString());
+                    txtApellido.setText(tblChoferes.getValueAt(fila, 2).toString());
+                    txtTelefono.setText(tblChoferes.getValueAt(fila, 3).toString());
+                    txtDireccion.setText(tblChoferes.getValueAt(fila, 4).toString());
+                }
+            }
+    
+    });
     }
 
     /**
@@ -46,8 +69,13 @@ public class chofer extends javax.swing.JInternalFrame {
         txtDireccion = new javax.swing.JTextField();
         txtCedula = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         btnAgregar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblChoferes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,6 +120,17 @@ public class chofer extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 104, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,26 +145,59 @@ public class chofer extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregar)
-                    .addComponent(jButton1))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAgregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        tblChoferes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblChoferes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,9 +223,15 @@ public class chofer extends javax.swing.JInternalFrame {
                             .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTelefono)
                             .addComponent(txtDireccion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,27 +241,32 @@ public class chofer extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel5)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                            .addComponent(jLabel6)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -227,6 +310,16 @@ public class chofer extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        modificarChofer();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -265,6 +358,8 @@ public class chofer extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,6 +367,9 @@ public class chofer extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblChoferes;
     private componentes.txtMayusculas txtApellido;
     private javax.swing.JFormattedTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
@@ -327,6 +425,7 @@ public class chofer extends javax.swing.JInternalFrame {
                 int n=psd.executeUpdate();
                 if (n>0) {
                     JOptionPane.showMessageDialog(this, "Inserción correcta");
+                    cargarTabla("");
                 }
 
             } catch (SQLException ex) {
@@ -334,4 +433,124 @@ public class chofer extends javax.swing.JInternalFrame {
             }
         }
     }
+    DefaultTableModel modelo;
+    public void cargarTabla(String dato){
+        String[] titulos = {"CEDULA", "NOMBRE",
+            "APELLIDO", "TELEFONO", "DIRECCIÓN"
+           };
+        modelo = new DefaultTableModel(null, titulos);
+        String[] registros = new String[5];
+        try {
+
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "SELECT  CHO_CEDULA,CHO_NOMBRE, CHO_APELLIDO,CHO_TELEFONO, CHO_DIRECCION FROM chofer";
+            Statement psd = cn.createStatement();
+            ResultSet rs = psd.executeQuery(sql);
+            while (rs.next()) {
+                registros[0] = rs.getString(1);
+                registros[1] = rs.getString(2);
+                registros[2] = rs.getString(3);
+                registros[3] = rs.getString(4);
+                registros[4] = rs.getString(5);
+              
+                modelo.addRow(registros);
+            }
+            tblChoferes.setModel(modelo);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    public void modificarChofer(){
+        boolean cedu = false, nom = false, ape = false,tel=false, dir = false;
+        String cedula="", nombre="", apellido="", telefono="", direccion="";
+        if (txtCedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene correctamente la cédula");
+        } else {
+            cedu = true;
+            cedula=txtCedula.getText();
+        }
+        if (txtNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene correctamente el nombre");
+        } else {
+            nom = true;
+            nombre=txtNombre.getText();
+        }
+        if (txtApellido.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene correctamente el apellido");
+        }else{
+            ape=true;
+            apellido=txtApellido.getText();
+        }
+        if (txtTelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene correctamente el telefono");
+        }else{
+            tel=true;
+            telefono=txtTelefono.getText();
+        }
+         if (txtDireccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene correctamente la dirección");
+        }else{
+            dir=true;
+            direccion=txtDireccion.getText();
+        }
+        if (cedu && nom && ape&&tel && dir) {
+            try {
+                conexion cc = new conexion();
+                Connection cn = cc.conectar();
+                String sql = "";
+                sql = "UPDATE chofer SET CHO_NOMBRE='" + nombre + "',CHO_APELLIDO='" + apellido + 
+                    "', CHO_TELEFONO='" + telefono + "', "
+                    + "CHO_DIRECCION='" + direccion+ "' "
+                    +  " where CHO_CEDULA='" + cedula + "'";
+            PreparedStatement psd = cn.prepareStatement(sql);
+            int n= psd.executeUpdate();
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Se modificó");
+                cargarTabla("");
+              
+            
+                limpiar();
+            }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(chofer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    public void eliminar(){
+          if(txtCedula.getText().isEmpty()){}else{
+           if (JOptionPane.showConfirmDialog(new JInternalFrame(),
+                "Estas seguro de borrar el registro?", "Borrar resgistro", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        
+        try {
+            
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "DELETE FROM chofer  WHERE CHO_CEDULA='" + txtCedula.getText() + "'";
+            PreparedStatement psd = cn.prepareStatement(sql);
+            int n = psd.executeUpdate();
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Se elimino");
+                cargarTabla("");
+                
+                limpiar();
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }}else{}}
+       }
+
+    private void limpiar() {
+        txtApellido.setText("");
+        txtCedula.setText("");
+        txtDireccion.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
+    }
+    
+    
 }
