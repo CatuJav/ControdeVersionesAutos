@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce949a05-4fa3-4e47-acb7-00c8a23842da">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     autos.`AUT_PLACA` AS autos_AUT_PLACA,
+     autos.`MOD_CODIGO` AS autos_MOD_CODIGO,
+     autos.`AUT_ANIO` AS autos_AUT_ANIO,
+     autos.`AUT_COLOR` AS autos_AUT_COLOR,
+     autos.`AUT_CAPACIDAD` AS autos_AUT_CAPACIDAD,
+     autos.`AUT_OBSERVACION` AS autos_AUT_OBSERVACION,
+     autos.`ACTIVO` AS autos_ACTIVO,
+     marca.`MAR_CODIGO` AS marca_MAR_CODIGO,
+     marca.`MAR_NOM` AS marca_MAR_NOM,
+     modelo.`MOD_CODIGO` AS modelo_MOD_CODIGO,
+     modelo.`MAR_CODIGO` AS modelo_MAR_CODIGO,
+     modelo.`COD_NOM` AS modelo_COD_NOM
+FROM
+     `marca` marca INNER JOIN `modelo` modelo ON marca.`MAR_CODIGO` = modelo.`MAR_CODIGO`
+     INNER JOIN `autos` autos ON modelo.`MOD_CODIGO` = autos.`MOD_CODIGO`]]>
+	</queryString>
+	<field name="autos_AUT_PLACA" class="java.lang.String"/>
+	<field name="marca_MAR_NOM" class="java.lang.String"/>
+	<field name="modelo_COD_NOM" class="java.lang.String"/>
+	<variable name="autos_AUT_PLACA_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{autos_AUT_PLACA}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="802" splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="2" width="100" height="20" uuid="3e39f133-1cd4-48d0-baed-2f4b2390dc44"/>
+				<text><![CDATA[autos_AUT_PLACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="2" width="100" height="20" uuid="2dd13d4c-2de3-4bc4-af52-6936d538f84d"/>
+				<text><![CDATA[marca_MAR_NOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="2" width="100" height="20" uuid="cc14e379-bcb5-436a-93fc-9a4183fd610b"/>
+				<text><![CDATA[modelo_COD_NOM]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="100" height="20" uuid="029ea6e1-d345-47a8-9bc8-3cf4dc7d76d9"/>
+				<textFieldExpression><![CDATA[$F{autos_AUT_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="0" width="100" height="20" uuid="96c6a843-01f5-4f58-a066-724d85f7b33f"/>
+				<textFieldExpression><![CDATA[$F{marca_MAR_NOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="0" width="100" height="20" uuid="1ec9ac2a-3c68-4a45-ba56-82f2b1172018"/>
+				<textFieldExpression><![CDATA[$F{modelo_COD_NOM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="261" splitType="Stretch">
+			<textField>
+				<reportElement x="310" y="0" width="100" height="20" uuid="c6d63700-c834-4e85-b9f8-5ced18cc76a3"/>
+				<textFieldExpression><![CDATA[$V{autos_AUT_PLACA_1}]]></textFieldExpression>
+			</textField>
+			<stackedBar3DChart>
+				<chart>
+					<reportElement x="11" y="0" width="200" height="100" uuid="0481a33d-f801-452d-a4c9-44be85398ae8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$V{autos_AUT_PLACA_1}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{autos_AUT_PLACA}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{autos_AUT_PLACA_1}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+		</band>
+	</summary>
+</jasperReport>
