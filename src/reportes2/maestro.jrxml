@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a65483f-14a7-48c2-ac9e-06410b893d1f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="placa" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\programasjava\\Ejemplo1DS\\src\\reportes2\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     autos.`AUT_PLACA` AS autos_AUT_PLACA,
+     autos.`MOD_CODIGO` AS autos_MOD_CODIGO,
+     autos.`AUT_ANIO` AS autos_AUT_ANIO,
+     autos.`AUT_COLOR` AS autos_AUT_COLOR,
+     autos.`AUT_CAPACIDAD` AS autos_AUT_CAPACIDAD,
+     autos.`AUT_OBSERVACION` AS autos_AUT_OBSERVACION,
+     autos.`ACTIVO` AS autos_ACTIVO,
+     modelo.`MOD_CODIGO` AS modelo_MOD_CODIGO,
+     modelo.`MAR_CODIGO` AS modelo_MAR_CODIGO,
+     modelo.`COD_NOM` AS modelo_COD_NOM,
+     marca.`MAR_CODIGO` AS marca_MAR_CODIGO,
+     marca.`MAR_NOM` AS marca_MAR_NOM
+FROM
+     `modelo` modelo INNER JOIN `autos` autos ON modelo.`MOD_CODIGO` = autos.`MOD_CODIGO`
+     INNER JOIN `marca` marca ON modelo.`MAR_CODIGO` = marca.`MAR_CODIGO`
+WHERE
+     autos.AUT_PLACA = $P{placa}]]>
+	</queryString>
+	<field name="autos_AUT_PLACA" class="java.lang.String"/>
+	<field name="autos_MOD_CODIGO" class="java.lang.String"/>
+	<field name="autos_AUT_ANIO" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_COLOR" class="java.lang.String"/>
+	<field name="autos_AUT_CAPACIDAD" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_OBSERVACION" class="java.lang.String"/>
+	<field name="autos_ACTIVO" class="java.lang.Boolean"/>
+	<field name="modelo_MOD_CODIGO" class="java.lang.String"/>
+	<field name="modelo_MAR_CODIGO" class="java.lang.String"/>
+	<field name="modelo_COD_NOM" class="java.lang.String"/>
+	<field name="marca_MAR_CODIGO" class="java.lang.String"/>
+	<field name="marca_MAR_NOM" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="318" y="34" width="190" height="20" uuid="7c5c2c8a-7721-4409-9dd5-3b9cf69eabff"/>
+				<text><![CDATA[NUMERO DE VIAJES POR AUTO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="62" y="9" width="100" height="20" uuid="6c2f320d-3caa-4e4d-b49a-33f31225ad7c"/>
+				<textFieldExpression><![CDATA[$F{autos_AUT_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="9" width="100" height="20" uuid="3d8b82f4-3b48-4ad0-96eb-8341b33b83f7"/>
+				<textFieldExpression><![CDATA[$F{autos_AUT_ANIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="348" y="9" width="100" height="20" uuid="72c2b047-57df-4c61-a7b2-500995063706"/>
+				<textFieldExpression><![CDATA[$F{autos_AUT_COLOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="9" width="100" height="20" uuid="a1ab941a-2e36-458c-801d-74e6de7b1a39"/>
+				<textFieldExpression><![CDATA[$F{modelo_COD_NOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="663" y="9" width="100" height="20" uuid="69effec2-86ad-44cb-8d67-8b80a559f16e"/>
+				<textFieldExpression><![CDATA[$F{marca_MAR_NOM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="9" width="62" height="20" uuid="df1d62ab-558d-4b53-9fd9-15e50b958ec0"/>
+				<text><![CDATA[PLACA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="9" width="39" height="20" uuid="46207f5f-3039-4240-8fcd-ae8ecdaaa22c"/>
+				<text><![CDATA[AÑO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="9" width="47" height="20" uuid="413d2c3e-d59a-42b9-9d27-b27c3c256d15"/>
+				<text><![CDATA[COLOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="9" width="46" height="20" uuid="5453c2da-155e-4d89-ae8c-dc2df7b23cef"/>
+				<text><![CDATA[MODELO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="9" width="54" height="20" uuid="d1146752-f8c8-448d-a794-d7d8d0d285e4"/>
+				<text><![CDATA[MARCA:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="113" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="54" uuid="22ef81ec-8a4c-4814-844f-51b660170fb9"/>
+				<subreportParameter name="placa">
+					<subreportParameterExpression><![CDATA[$P{placa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "detalle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

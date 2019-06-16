@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11099ac1-95e8-48b2-b1ec-73feb70d9994">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     viajes.`VIAJE_CODIGO` AS viajes_VIAJE_CODIGO,
+     viajes.`AUT_PLACA` AS viajes_AUT_PLACA,
+     viajes.`CHO_CEDULA` AS viajes_CHO_CEDULA,
+     viajes.`F_SALIDA` AS viajes_F_SALIDA,
+     viajes.`F_LLEGADA` AS viajes_F_LLEGADA,
+     viajes.`VIAJE_COSTO` AS viajes_VIAJE_COSTO,
+     viajes.`VIAJE_KILOMETRAJE` AS viajes_VIAJE_KILOMETRAJE,
+     viajes.`VIAJE_OBSERVACION` AS viajes_VIAJE_OBSERVACION,
+     viajes.`CIU_CODIGO` AS viajes_CIU_CODIGO,
+     viajes.`CIU_CIU_CODIGO` AS viajes_CIU_CIU_CODIGO,
+     autos.`AUT_PLACA` AS autos_AUT_PLACA,
+     autos.`MOD_CODIGO` AS autos_MOD_CODIGO,
+     autos.`AUT_ANIO` AS autos_AUT_ANIO,
+     autos.`AUT_COLOR` AS autos_AUT_COLOR,
+     autos.`AUT_CAPACIDAD` AS autos_AUT_CAPACIDAD,
+     autos.`AUT_OBSERVACION` AS autos_AUT_OBSERVACION,
+     autos.`ACTIVO` AS autos_ACTIVO,
+     chofer.`CHO_CEDULA` AS chofer_CHO_CEDULA,
+     chofer.`CHO_NOMBRE` AS chofer_CHO_NOMBRE,
+     chofer.`CHO_APELLIDO` AS chofer_CHO_APELLIDO,
+     chofer.`CHO_TELEFONO` AS chofer_CHO_TELEFONO,
+     chofer.`CHO_DIRECCION` AS chofer_CHO_DIRECCION
+FROM
+     `autos` autos INNER JOIN `viajes` viajes ON autos.`AUT_PLACA` = viajes.`AUT_PLACA`
+     INNER JOIN `chofer` chofer ON viajes.`CHO_CEDULA` = chofer.`CHO_CEDULA`]]>
+	</queryString>
+	<field name="viajes_VIAJE_CODIGO" class="java.lang.Integer"/>
+	<field name="viajes_AUT_PLACA" class="java.lang.String"/>
+	<field name="viajes_CHO_CEDULA" class="java.lang.String"/>
+	<field name="viajes_F_SALIDA" class="java.sql.Date"/>
+	<field name="viajes_F_LLEGADA" class="java.sql.Date"/>
+	<field name="viajes_VIAJE_COSTO" class="java.math.BigDecimal"/>
+	<field name="viajes_VIAJE_KILOMETRAJE" class="java.lang.Integer"/>
+	<field name="viajes_VIAJE_OBSERVACION" class="java.lang.String"/>
+	<field name="viajes_CIU_CODIGO" class="java.lang.String"/>
+	<field name="viajes_CIU_CIU_CODIGO" class="java.lang.String"/>
+	<field name="autos_AUT_PLACA" class="java.lang.String"/>
+	<field name="autos_MOD_CODIGO" class="java.lang.String"/>
+	<field name="autos_AUT_ANIO" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_COLOR" class="java.lang.String"/>
+	<field name="autos_AUT_CAPACIDAD" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_OBSERVACION" class="java.lang.String"/>
+	<field name="autos_ACTIVO" class="java.lang.Boolean"/>
+	<field name="chofer_CHO_CEDULA" class="java.lang.String"/>
+	<field name="chofer_CHO_NOMBRE" class="java.lang.String"/>
+	<field name="chofer_CHO_APELLIDO" class="java.lang.String"/>
+	<field name="chofer_CHO_TELEFONO" class="java.lang.String"/>
+	<field name="chofer_CHO_DIRECCION" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="240" y="35" width="100" height="20" uuid="deb017ca-0867-495b-bee2-a9b3dfebb3df"/>
+				<text><![CDATA[Reporte de viajes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="eed3f62a-8e7c-4d64-9ecd-754ecc2458d1"/>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="44c6d65b-f1c6-453c-9dd6-5c53f7845f05"/>
+				<text><![CDATA[COSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="7f628425-5f0b-46fd-a4e2-0b42a7716c09"/>
+				<text><![CDATA[FECHA  DE SALIDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="036fe85e-578e-4d34-a3f0-956b624f9e71"/>
+				<text><![CDATA[FECHA DE LLEGADA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="ba58797b-5292-4718-aa77-a9018727dc9f"/>
+				<textFieldExpression><![CDATA[$F{viajes_VIAJE_CODIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="10c5acb7-4cd9-4a8c-84db-2c1bedf81274"/>
+				<textFieldExpression><![CDATA[$F{viajes_VIAJE_COSTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="1f6d7ea3-99c4-4ee2-991f-1275569de754"/>
+				<textFieldExpression><![CDATA[$F{viajes_F_SALIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="4195ab1e-caf2-470a-b282-94d41fe11083"/>
+				<textFieldExpression><![CDATA[$F{viajes_F_LLEGADA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="122" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="140" y="11" width="200" height="100" uuid="c34068dc-9851-49f7-8f4f-edd42eb6393f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Costos en cada viaje"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{viajes_VIAJE_CODIGO}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{viajes_VIAJE_COSTO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

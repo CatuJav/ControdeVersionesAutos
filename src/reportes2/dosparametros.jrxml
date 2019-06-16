@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="28389af2-297b-4594-baa8-fe180cd1cbda">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="chofer" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="placa" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     chofer.`CHO_CEDULA` AS chofer_CHO_CEDULA,
+     chofer.`CHO_NOMBRE` AS chofer_CHO_NOMBRE,
+     chofer.`CHO_APELLIDO` AS chofer_CHO_APELLIDO,
+     chofer.`CHO_TELEFONO` AS chofer_CHO_TELEFONO,
+     chofer.`CHO_DIRECCION` AS chofer_CHO_DIRECCION,
+     viajes.`VIAJE_CODIGO` AS viajes_VIAJE_CODIGO,
+     viajes.`AUT_PLACA` AS viajes_AUT_PLACA,
+     viajes.`CHO_CEDULA` AS viajes_CHO_CEDULA,
+     viajes.`F_SALIDA` AS viajes_F_SALIDA,
+     viajes.`F_LLEGADA` AS viajes_F_LLEGADA,
+     viajes.`VIAJE_COSTO` AS viajes_VIAJE_COSTO,
+     viajes.`VIAJE_KILOMETRAJE` AS viajes_VIAJE_KILOMETRAJE,
+     viajes.`VIAJE_OBSERVACION` AS viajes_VIAJE_OBSERVACION,
+     viajes.`CIU_CODIGO` AS viajes_CIU_CODIGO,
+     viajes.`CIU_CIU_CODIGO` AS viajes_CIU_CIU_CODIGO,
+     autos.`AUT_PLACA` AS autos_AUT_PLACA,
+     autos.`MOD_CODIGO` AS autos_MOD_CODIGO,
+     autos.`AUT_ANIO` AS autos_AUT_ANIO,
+     autos.`AUT_COLOR` AS autos_AUT_COLOR,
+     autos.`AUT_CAPACIDAD` AS autos_AUT_CAPACIDAD,
+     autos.`AUT_OBSERVACION` AS autos_AUT_OBSERVACION,
+     autos.`ACTIVO` AS autos_ACTIVO
+FROM
+     `chofer` chofer INNER JOIN `viajes` viajes ON chofer.`CHO_CEDULA` = viajes.`CHO_CEDULA`
+     INNER JOIN `autos` autos ON viajes.`AUT_PLACA` = autos.`AUT_PLACA` WHERE viajes.CHO_CEDULA=$P{chofer} AND
+viajes.AUT_PLACA=$P{placa}]]>
+	</queryString>
+	<field name="chofer_CHO_CEDULA" class="java.lang.String"/>
+	<field name="chofer_CHO_NOMBRE" class="java.lang.String"/>
+	<field name="chofer_CHO_APELLIDO" class="java.lang.String"/>
+	<field name="chofer_CHO_TELEFONO" class="java.lang.String"/>
+	<field name="chofer_CHO_DIRECCION" class="java.lang.String"/>
+	<field name="viajes_VIAJE_CODIGO" class="java.lang.Integer"/>
+	<field name="viajes_AUT_PLACA" class="java.lang.String"/>
+	<field name="viajes_CHO_CEDULA" class="java.lang.String"/>
+	<field name="viajes_F_SALIDA" class="java.sql.Date"/>
+	<field name="viajes_F_LLEGADA" class="java.sql.Date"/>
+	<field name="viajes_VIAJE_COSTO" class="java.math.BigDecimal"/>
+	<field name="viajes_VIAJE_KILOMETRAJE" class="java.lang.Integer"/>
+	<field name="viajes_VIAJE_OBSERVACION" class="java.lang.String"/>
+	<field name="viajes_CIU_CODIGO" class="java.lang.String"/>
+	<field name="viajes_CIU_CIU_CODIGO" class="java.lang.String"/>
+	<field name="autos_AUT_PLACA" class="java.lang.String"/>
+	<field name="autos_MOD_CODIGO" class="java.lang.String"/>
+	<field name="autos_AUT_ANIO" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_COLOR" class="java.lang.String"/>
+	<field name="autos_AUT_CAPACIDAD" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_OBSERVACION" class="java.lang.String"/>
+	<field name="autos_ACTIVO" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="226" y="27" width="100" height="20" uuid="c2248ee0-f3be-4fd1-bd4e-acfe7373b446"/>
+				<text><![CDATA[CHOFER Y AUTO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="4cff2208-666f-46ba-8b23-51a533d75a3e"/>
+				<text><![CDATA[VIAJE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="20" uuid="df567311-eb59-470a-9965-38e5dc3af37e"/>
+				<text><![CDATA[PLACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="20" uuid="10c909e4-ada9-49b0-a112-84ce4f86f89e"/>
+				<text><![CDATA[CHOFER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="2" width="100" height="20" uuid="4137854e-00a7-4977-a39d-b6553e268158"/>
+				<text><![CDATA[FECHA DE SALIDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="2" width="100" height="20" uuid="30f461af-8446-44e4-b859-53d322b6cec8"/>
+				<text><![CDATA[FECHA DE LLEAGADA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="a47f6190-5c43-4469-8ad9-5122f605dc80"/>
+				<textFieldExpression><![CDATA[$F{viajes_VIAJE_CODIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="45ec908b-5fff-4d07-9890-1741a0775bba"/>
+				<textFieldExpression><![CDATA[$F{viajes_AUT_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="1e8e48ea-be1b-4543-b5ed-3d5efba4e6ca"/>
+				<textFieldExpression><![CDATA[$F{viajes_CHO_CEDULA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="2b65970d-f52c-426b-8aae-682b68315cca"/>
+				<textFieldExpression><![CDATA[$F{viajes_F_SALIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="b9c72381-8be3-4dee-aa02-b6a2b0e1daf1"/>
+				<textFieldExpression><![CDATA[$F{viajes_F_LLEGADA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

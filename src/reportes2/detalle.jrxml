@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="500cc74e-723a-485b-a8b9-8f1eaea75a88">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="placa" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     viajes.`VIAJE_CODIGO` AS viajes_VIAJE_CODIGO,
+     viajes.`AUT_PLACA` AS viajes_AUT_PLACA,
+     viajes.`CHO_CEDULA` AS viajes_CHO_CEDULA,
+     viajes.`F_SALIDA` AS viajes_F_SALIDA,
+     viajes.`F_LLEGADA` AS viajes_F_LLEGADA,
+     viajes.`VIAJE_COSTO` AS viajes_VIAJE_COSTO,
+     viajes.`VIAJE_KILOMETRAJE` AS viajes_VIAJE_KILOMETRAJE,
+     viajes.`VIAJE_OBSERVACION` AS viajes_VIAJE_OBSERVACION,
+     viajes.`CIU_CODIGO` AS viajes_CIU_CODIGO,
+     viajes.`CIU_CIU_CODIGO` AS viajes_CIU_CIU_CODIGO,
+     ciudades.`CIU_CODIGO` AS ciudades_CIU_CODIGO,
+     ciudades.`CIU_NOMBRE` AS ciudades_CIU_NOMBRE,
+     C2.`CIU_NOMBRE` AS ciudadades_Llegada,
+     autos.`AUT_PLACA` AS autos_AUT_PLACA,
+     autos.`MOD_CODIGO` AS autos_MOD_CODIGO,
+     autos.`AUT_ANIO` AS autos_AUT_ANIO,
+     autos.`AUT_COLOR` AS autos_AUT_COLOR,
+     autos.`AUT_CAPACIDAD` AS autos_AUT_CAPACIDAD,
+     autos.`AUT_OBSERVACION` AS autos_AUT_OBSERVACION,
+     autos.`ACTIVO` AS autos_ACTIVO
+FROM
+     `viajes` viajes INNER JOIN `ciudades` ciudades ON viajes.`CIU_CODIGO` = ciudades.`CIU_CODIGO`
+     INNER JOIN `ciudades` C2 ON viajes.`CIU_CIU_CODIGO` = C2.`CIU_CODIGO`
+     INNER JOIN `autos` autos ON viajes.`AUT_PLACA` = autos.`AUT_PLACA`
+where viajes.AUT_PLACA=$P{placa}]]>
+	</queryString>
+	<field name="viajes_VIAJE_CODIGO" class="java.lang.Integer"/>
+	<field name="viajes_AUT_PLACA" class="java.lang.String"/>
+	<field name="viajes_CHO_CEDULA" class="java.lang.String"/>
+	<field name="viajes_F_SALIDA" class="java.sql.Date"/>
+	<field name="viajes_F_LLEGADA" class="java.sql.Date"/>
+	<field name="viajes_VIAJE_COSTO" class="java.math.BigDecimal"/>
+	<field name="viajes_VIAJE_KILOMETRAJE" class="java.lang.Integer"/>
+	<field name="viajes_VIAJE_OBSERVACION" class="java.lang.String"/>
+	<field name="viajes_CIU_CODIGO" class="java.lang.String"/>
+	<field name="viajes_CIU_CIU_CODIGO" class="java.lang.String"/>
+	<field name="ciudades_CIU_CODIGO" class="java.lang.String"/>
+	<field name="ciudades_CIU_NOMBRE" class="java.lang.String"/>
+	<field name="ciudadades_Llegada" class="java.lang.String"/>
+	<field name="autos_AUT_PLACA" class="java.lang.String"/>
+	<field name="autos_MOD_CODIGO" class="java.lang.String"/>
+	<field name="autos_AUT_ANIO" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_COLOR" class="java.lang.String"/>
+	<field name="autos_AUT_CAPACIDAD" class="java.math.BigDecimal"/>
+	<field name="autos_AUT_OBSERVACION" class="java.lang.String"/>
+	<field name="autos_ACTIVO" class="java.lang.Boolean"/>
+	<variable name="viajes_VIAJE_CODIGO_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{viajes_VIAJE_CODIGO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="1c88b1af-dca2-41cd-acb4-cc81c2d1dc51"/>
+				<text><![CDATA[VIAJE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="20" uuid="7e1a3918-c2e2-4d0b-9deb-b21d792367a1"/>
+				<text><![CDATA[CHOFER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="20" uuid="75b9693d-b469-42bb-89fb-dae53a8e6d7b"/>
+				<text><![CDATA[FECHA DE SALIDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="2" width="100" height="20" uuid="8b1aebab-49d2-49e5-8fbc-ff4b87f3c37d"/>
+				<text><![CDATA[FECHA DE LLEGADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="2" width="100" height="20" uuid="7d30c1b0-ba8a-44e3-a36d-b072c414641c"/>
+				<text><![CDATA[ORIGEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="2" width="100" height="20" uuid="79eb0dd3-a3af-47fa-874d-ab042a2e9409"/>
+				<text><![CDATA[DESTINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="2" width="100" height="20" uuid="079784f2-c382-40a3-9b89-d28684cd57a0"/>
+				<text><![CDATA[COSTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="20848377-7bb5-4cd4-8075-f467074cd4bd"/>
+				<textFieldExpression><![CDATA[$F{viajes_VIAJE_CODIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="13145d40-dbc3-4a98-bc8d-24fe2ab1667a"/>
+				<textFieldExpression><![CDATA[$F{viajes_CHO_CEDULA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="0ba4584b-29de-4672-9383-124a6b3cd67b"/>
+				<textFieldExpression><![CDATA[$F{viajes_F_SALIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="0433b2a6-2b14-4cd8-b630-303901b9cba3"/>
+				<textFieldExpression><![CDATA[$F{viajes_F_LLEGADA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="1abb4644-2bfe-4c5f-89d4-974e493e1261"/>
+				<textFieldExpression><![CDATA[$F{ciudades_CIU_CODIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="20" uuid="d23625df-69d7-43e2-b088-99056b594aa0"/>
+				<textFieldExpression><![CDATA[$F{ciudades_CIU_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="20" uuid="71e79cc1-9b9b-4bd7-b3a0-c6bdad79b499"/>
+				<textFieldExpression><![CDATA[$F{viajes_VIAJE_COSTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="500" y="0" width="100" height="20" uuid="99e982a6-621e-49b3-b87d-3779589824f1"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="20" uuid="c92b076b-6350-46b9-8ccf-26690dc4bd91"/>
+				<textFieldExpression><![CDATA[$V{viajes_VIAJE_CODIGO_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
